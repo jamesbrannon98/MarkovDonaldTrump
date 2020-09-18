@@ -1,7 +1,7 @@
 import string
 import random
 import math
-import GetOldTweets3 as got
+import re
 
 def tokenize(text):
     separatedText = ""
@@ -79,7 +79,12 @@ class NgramModel(object):
                 startTuple = (('<START>',))
                 context = startTuple * (self.n - 1)
             count += 1
-        return sentence
+        sentence = re.sub(r'\s([?.!:,;\-"\'\)/](?:\s|$))', r'\1', sentence)
+        sentence = re.sub(r'\samp;', '', sentence)
+        if sentence[0:5] == 'http:':
+            sentence = self.random_text(token_count)
+        sentence = sentence.split(' http')
+        return sentence[0]
 
     def perplexity(self, sentence):
         perplexity = 0
@@ -97,21 +102,3 @@ def create_ngram_model(n, path):
     for line in lines:
         model.update(line)
     return model
-
-username = 'realDonaldTrump'
-count = 1000
-# Creation of query object
-tweetCriteria = got.manager.TweetCriteria().setUsername(username)\
-                                        .setMaxTweets(count)
-# Creation of list that contains all tweets
-tweets = got.manager.TweetManager.getTweets(tweetCriteria)
-# Creating list of chosen tweet data
-user_tweets = [tweet.text for tweet in tweets]
-
-m = NgramModel(2)
-for tweet in user_tweets:
-    m.update(tweet)
-text = m.random_text(100)
-trump = text.split("<END>")
-for line in trump:
-    print("\n" + line)
