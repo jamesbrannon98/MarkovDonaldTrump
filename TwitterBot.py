@@ -59,7 +59,7 @@ class TwitterBot(object):
                     tweet = self.generate_tweet()
                     self.publish_tweet(tweet)
                 oldTweet = newTweet.text
-            except IndexError:
+            except (IndexError, tweepy.TweepError) as e:
                 pass
             time.sleep(15)
 
