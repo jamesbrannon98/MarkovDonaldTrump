@@ -15,3 +15,5 @@ Twitter profile.
 All tweets produced and posted are 100% computer generated, and are no indication
 of any of the thoughts and opinions of anyone involved with the project
 (except Donald Trump, obviously).
+
+Link to Twitter Account: https://twitter.com/ngrmDonaldTrump
