@@ -1,4 +1,4 @@
-# NgramDonaldTrump
+# NgramTwitterBot
 
 This is a Python Twitter Bot that utilizes an ngram model to produce tweets 
 that are subsequently posted by the bot account.
